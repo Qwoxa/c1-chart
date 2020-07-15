@@ -2,8 +2,9 @@
   <div v-if="isInitialized" class="chart-content" :style="styles">
     <div class="chart-content__body" :style="chartBodyStyles">
       <ChartColumn
-        v-for="column in columns"
+        v-for="(column, idx) in finalColumns"
         :key="column.name"
+        :column-index="idx + 1"
         :width="column.width"
         :left="column.left"
         :height="column.height"
@@ -44,6 +45,7 @@ export default {
       bandwidth: 0,
 
       xScale: null,
+      yScale: null,
     };
   },
 
@@ -52,13 +54,19 @@ export default {
   },
 
   computed: {
-    columns() {
-      return this.columnNames.map(name => {
+    finalColumns() {
+      if (!this.isInitialized) {
+        return [];
+      }
+
+      return this.chartData.columns.map(column => {
+        const { name } = column;
+
         return {
           name,
           left: this.xScale(name),
           width: this.columnWidth,
-          height: 10,
+          height: this.yScale(column.sumValue),
         };
       });
     },
@@ -81,12 +89,27 @@ export default {
   methods: {
     async initialize() {
       await this.fetchChart();
+      this.transformChartData();
       this.calculateChart();
       this.isInitialized = true;
     },
     async fetchChart() {
       const response = await fetch('/mock.json');
       this.chartData = await response.json();
+    },
+    transformChartData() {
+      this.chartData.columns = this.columnNames.map(name => {
+        const records = this.chartData[name].map(record => {
+          const name = Object.keys(record)[0];
+          const value = Object.values(record)[0];
+          return { name, value };
+        });
+
+        const sumValue = records.reduce((acc, r) => acc + r.value, 0);
+        return { name, records, sumValue };
+      });
+
+      console.log(this.chartData);
     },
     calculateChart() {
       this.xScale = d3
@@ -96,7 +119,16 @@ export default {
         .range([0, this.chartWidth])
         .round(true);
 
-      console.log(this.xScale.bandwidth());
+      const yDomain = this.getYDomain();
+      // todo hardcode
+      this.yScale = d3
+        .scaleLinear()
+        .domain(yDomain)
+        .range([0, this.gridHeight - 5]);
+    },
+    getYDomain() {
+      const sumValues = this.chartData.columns.map(c => c.sumValue);
+      return [0, Math.max(...sumValues)];
     },
   },
 };

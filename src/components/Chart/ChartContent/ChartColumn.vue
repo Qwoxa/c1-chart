@@ -1,5 +1,5 @@
 <template>
-  <div class="chart-column" :style="styles"></div>
+  <div :class="classes" :style="styles"></div>
 </template>
 
 <script>
@@ -23,9 +23,21 @@ export default {
       type: Number,
       required: true,
     },
+    columnIndex: {
+      type: Number,
+      required: true,
+    },
   },
 
   computed: {
+    classes() {
+      const cl = 'chart-column';
+
+      return {
+        [cl]: true,
+        [`${cl}--column-${this.columnIndex}`]: true,
+      };
+    },
     styles() {
       return {
         height: `${this.height}px`,
@@ -40,7 +52,27 @@ export default {
 
 <style lang="scss">
 .chart-column {
-  border: 1px solid red;
   position: absolute;
+  border-radius: 2px;
+
+  &--column-1 {
+    background-color: rgba(127, 202, 159, 0.3);
+    border: 1px solid #7fca9f;
+
+    &:hover {
+      background-color: #aee2c4;
+      border: 1px solid #7fca9f;
+    }
+  }
+
+  &--column-2 {
+    background-color: rgba(255, 188, 13, 0.3);
+    border: 1px solid #ffbc0d;
+
+    &:hover {
+      background-color: #ffda93;
+      border: 1px solid #ffbc0d;
+    }
+  }
 }
 </style>
