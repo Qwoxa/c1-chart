@@ -1,20 +1,20 @@
 <template>
   <div class="chart">
     <ChartContent />
-    <ChartLegend />
+    <ChartDescription />
   </div>
 </template>
 
 <script>
-import ChartContent from '@/components/Chart/ChartContent';
-import ChartLegend from '@/components/Chart/ChartLegend';
+import ChartContent from '@/components/Chart/ChartContent/ChartContent';
+import ChartDescription from '@/components/Chart/ChartDescription';
 
 export default {
   name: 'Chart',
 
   components: {
     ChartContent,
-    ChartLegend,
+    ChartDescription,
   },
 };
 </script>

@@ -1,0 +1,12 @@
+{
+  "dataTable": "Monthly cash flow estimate",
+  "graph": "c1",
+  "income": [{ "Rent": 1340.0 }, { "Internet": 40.0 }],
+  "expenses": [
+    { "Mortgage repayment": 720.0 },
+    { "Maintenance": 135.0 },
+    { "Taxes": 127.0 },
+    { "Other expenses": 50.0 },
+    { "Insurance": 45.0 }
+  ]
+}

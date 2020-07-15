@@ -1,16 +1,16 @@
 <template>
-  <div class="chart-content">
+  <div class="chart-description">
     <!-- markup -->
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ChartContent',
+  name: 'ChartDescription',
 };
 </script>
 
 <style lang="scss">
-.chart-content {
+.chart-description {
 }
 </style>
