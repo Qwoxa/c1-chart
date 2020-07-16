@@ -1,12 +1,12 @@
 <template>
-  <div class="chart-legend" :style="styles">
+  <div class="chart-legend">
     <div
       v-for="column in columns"
-      :key="column.name"
+      :key="column.legendName"
       class="chart-legend__item"
       :style="getColumnStyles(column)"
     >
-      {{ capitalize(column.name) }}
+      {{ capitalize(column.legendName) }}
     </div>
   </div>
 </template>
@@ -16,21 +16,9 @@ export default {
   name: 'ChartLegend',
 
   props: {
-    height: {
-      type: Number,
-      required: true,
-    },
     columns: {
       type: Array,
       required: true,
-    },
-  },
-
-  computed: {
-    styles() {
-      return {
-        height: `${this.height}px`,
-      };
     },
   },
 
@@ -57,6 +45,7 @@ export default {
   &__item {
     position: absolute;
     text-align: center;
+    font-size: 12px;
   }
 }
 </style>
