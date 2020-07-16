@@ -1,17 +1,19 @@
 <template>
-  <div class="tooltip-content">
-    <h3 class="tooltip-content__title">{{ capitalize(column.name) }}</h3>
-    <div class="tooltip-content__records">
+  <div class="chart-layout-tooltip-content">
+    <h3 class="chart-layout-tooltip-content__title">{{ capitalize(column.name) }}</h3>
+    <div class="chart-layout-tooltip-content__records">
       <div
         v-for="record in column.records"
         :key="record.name"
         :class="getRecordItemClasses(record)"
       >
-        <div class="tooltip-content__record-name">
+        <div class="chart-layout-tooltip-content__record-name">
           {{ record.name }}
         </div>
 
-        <div class="tooltip-content__record-value">${{ formatValue(record.value) }}</div>
+        <div class="chart-layout-tooltip-content__record-value">
+          ${{ formatValue(record.value) }}
+        </div>
       </div>
     </div>
   </div>
@@ -22,7 +24,7 @@ import { divideNumberWithComa } from '@/utils/helpers';
 import capitalize from 'lodash/capitalize';
 
 export default {
-  name: 'TooltipContent',
+  name: 'ChartLayoutTooltipContent',
 
   props: {
     column: {
@@ -43,7 +45,7 @@ export default {
     },
 
     getRecordItemClasses(record) {
-      const cl = 'tooltip-content__record-item';
+      const cl = 'chart-layout-tooltip-content__record-item';
 
       return {
         [cl]: true,
@@ -57,7 +59,7 @@ export default {
 <style lang="scss">
 $padding: 20px;
 
-.tooltip-content {
+.chart-layout-tooltip-content {
   font-size: 12px;
   line-height: 1.2;
   box-shadow: 0px 1px 25px rgba(0, 0, 0, 0.1);

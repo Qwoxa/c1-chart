@@ -2,7 +2,10 @@
   <div class="chart-layout" :style="styles">
     <TooltipContainer :position="tooltipPosition">
       <template v-if="hoveredItem" #tooltip-content>
-        <TooltipContent :column="hoveredItem.column" :subColumn="hoveredItem.subColumn" />
+        <ChartLayoutTooltipContent
+          :column="hoveredItem.column"
+          :subColumn="hoveredItem.subColumn"
+        />
       </template>
 
       <Grid
@@ -35,7 +38,7 @@
 <script>
 import Grid from '@/components/Base/Grid';
 import TooltipContainer from '@/components/Base/TooltipContainer';
-import TooltipContent from '@/components/Base/TooltipContent';
+import ChartLayoutTooltipContent from '@/components/Chart/ChartLayout/ChartLayoutTooltipContent';
 import ChartLayoutColumn from '@/components/Chart/ChartLayout/ChartLayoutColumn';
 
 export default {
@@ -44,7 +47,7 @@ export default {
   components: {
     ChartLayoutColumn,
     TooltipContainer,
-    TooltipContent,
+    ChartLayoutTooltipContent,
     Grid,
   },
 
