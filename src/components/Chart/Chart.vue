@@ -90,6 +90,12 @@ export default {
     async fetchChart() {
       const response = await fetch('/mock.json');
       this.chartData = await response.json();
+
+      this.columnNames.map(colName => {
+        if (this.chartData[colName] === undefined) {
+          this.chartData[colName] = [];
+        }
+      });
     },
     transformChartData() {
       this.chartData.columns = this.columnNames.map(name => {
