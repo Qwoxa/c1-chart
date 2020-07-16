@@ -44,8 +44,9 @@ export default {
   &__item {
     position: absolute;
     text-align: center;
-    font-size: 12px;
-    line-height: 1.2;
+    font-size: 10px;
+    font-weight: 600;
+    color: #737c8c;
   }
 }
 </style>
