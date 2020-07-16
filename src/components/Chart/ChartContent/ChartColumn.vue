@@ -115,11 +115,16 @@ export default {
     },
     evenlyDistributeAdditionalSpace(additionalSpace) {
       let isDistributed = false;
+      let leftNoDonors = false;
 
-      while (!isDistributed) {
+      while (!isDistributed || leftNoDonors) {
         const sectionsDonors = this.subColumns.filter(sc => sc.height > this.minSubcolumnHeight);
-        const subtrahend = additionalSpace / sectionsDonors.length;
+        if (sectionsDonors.length === 0) {
+          leftNoDonors = true;
+          break;
+        }
 
+        const subtrahend = additionalSpace / sectionsDonors.length;
         this.subColumns = this.subColumns.map(sc => {
           let finalSubtrahend = subtrahend;
 
