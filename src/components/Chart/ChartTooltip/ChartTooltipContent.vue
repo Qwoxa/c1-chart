@@ -2,7 +2,11 @@
   <div class="chart-tooltip-content">
     <h3 class="chart-tooltip-content__title">{{ capitalize(column.name) }}</h3>
     <div class="chart-tooltip-content__records">
-      <div v-for="record in sortedRecords" :key="record.name" :class="getRecordItemClasses(record)">
+      <div
+        v-for="record in column.records"
+        :key="record.name"
+        :class="getRecordItemClasses(record)"
+      >
         <div class="chart-tooltip-content__record-name">
           {{ record.name }}
         </div>
@@ -15,7 +19,6 @@
 
 <script>
 import { divideNumberWithComa } from '@/components/Chart/utils';
-import sortBy from 'lodash/sortBy';
 import capitalize from 'lodash/capitalize';
 
 export default {
@@ -48,12 +51,6 @@ export default {
       };
     },
   },
-
-  computed: {
-    sortedRecords() {
-      return sortBy(this.column.records, 'value');
-    },
-  },
 };
 </script>
 
@@ -67,7 +64,7 @@ $padding: 20px;
   background-color: #313844;
   border-radius: 3px;
   color: #fff;
-  width: 220px;
+  width: 250px;
 
   &__title {
     margin: 0 0 8px 0;
