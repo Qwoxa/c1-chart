@@ -1,31 +1,38 @@
 <template>
   <div class="chart-content" :style="styles">
-    <ChartGrid
-      :height="gridHeight"
-      :width="gridWidth"
-      :start-point-height="0.45"
-      :start-point-width="0.45"
-      :step="18.4"
-    >
-      <div class="chart-content__body" :style="chartBodyStyles">
-        <ChartColumn
-          v-for="(column, idx) in columns"
-          :key="column.name"
-          :column-index="idx + 1"
-          :width="column.width"
-          :left="column.left"
-          :height="column.height"
-          :grid-height="gridHeight - chartPaddingBottom"
-          :records="column.records"
-          :value="column.sumValue"
-        />
-      </div>
-    </ChartGrid>
+    <ChartTooltip>
+      <template v-if="hoveredItem" #tooltip-content>
+        Tooltip example
+      </template>
+
+      <ChartGrid
+        :height="gridHeight"
+        :width="gridWidth"
+        :start-point-height="0.45"
+        :start-point-width="0.45"
+        :step="18.4"
+      >
+        <div class="chart-content__body" :style="chartBodyStyles">
+          <ChartColumn
+            v-for="(column, idx) in columns"
+            :key="column.name"
+            :column-index="idx + 1"
+            :width="column.width"
+            :left="column.left"
+            :height="column.height"
+            :grid-height="gridHeight - chartPaddingBottom"
+            :records="column.records"
+            :value="column.sumValue"
+          />
+        </div>
+      </ChartGrid>
+    </ChartTooltip>
   </div>
 </template>
 
 <script>
 import ChartGrid from '@/components/Chart/ChartGrid';
+import ChartTooltip from '@/components/Chart/ChartTooltip';
 import ChartColumn from '@/components/Chart/ChartContent/ChartColumn';
 
 export default {
@@ -33,6 +40,7 @@ export default {
 
   components: {
     ChartColumn,
+    ChartTooltip,
     ChartGrid,
   },
 
@@ -61,6 +69,12 @@ export default {
       type: Array,
       required: true,
     },
+  },
+
+  data() {
+    return {
+      hoveredItem: null,
+    };
   },
 
   computed: {
