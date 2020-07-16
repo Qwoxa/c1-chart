@@ -17,6 +17,6 @@ export default {
   margin: 0 auto;
 
   // temp
-  padding-top: 5px;
+  padding-top: 100px;
 }
 </style>

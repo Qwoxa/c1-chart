@@ -16,8 +16,6 @@
 </template>
 
 <script>
-// import * as d3 from 'd3-scale';
-
 export default {
   name: 'ChartGrid',
 

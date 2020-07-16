@@ -5,6 +5,8 @@
       class="chart-column__sub-column-wr"
       :key="subColumn.name"
       :style="getSubColumnStyles(subColumn)"
+      @mouseenter="handleMouseEnter(subColumn)"
+      @mouseleave="handleMouseLeave"
     >
       <div class="chart-column__sub-column" />
     </div>
@@ -84,6 +86,18 @@ export default {
   },
 
   methods: {
+    handleMouseEnter(subColumn) {
+      const top = this.$el.offsetTop;
+      const left = this.left + this.width / 2;
+      const position = { top, left };
+
+      const params = { position, subColumn };
+
+      this.$emit('mouseenter', params);
+    },
+    handleMouseLeave() {
+      this.$emit('mouseleave');
+    },
     getSubColumnStyles(subColumn) {
       return {
         height: `${subColumn.height}px`,

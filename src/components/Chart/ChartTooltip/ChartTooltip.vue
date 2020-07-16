@@ -19,13 +19,20 @@
 export default {
   name: 'ChartTooltip',
 
+  props: {
+    position: {
+      type: Object,
+      required: true,
+    },
+  },
+
   data() {
     return {
       isTooltipVisible: false,
-      styles: {
-        left: 0,
-        top: 0,
-      },
+      // styles: {
+      //   left: 0,
+      //   top: 0,
+      // },
     };
   },
 
@@ -38,13 +45,16 @@ export default {
       this.isTooltipVisible = false;
     },
 
-    handleMouseMoveChart(e) {
-      this.lastMoveEvent = e;
+    handleMouseMoveChart() {
+      if (this.position === null) {
+        return;
+      }
+
+      const { top, left } = this.position;
 
       const tooltip = this.$refs.tooltip;
-
-      tooltip.style.left = '10px';
-      tooltip.style.top = '10px';
+      tooltip.style.top = `${top}px`;
+      tooltip.style.left = `${left}px`;
     },
   },
 };

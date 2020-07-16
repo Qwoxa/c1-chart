@@ -1,8 +1,8 @@
 <template>
   <div class="chart-content" :style="styles">
-    <ChartTooltip>
+    <ChartTooltip :position="tooltipPosition">
       <template v-if="hoveredItem" #tooltip-content>
-        Tooltip example
+        <ChartTooltipContent :column="hoveredItem.column" :subColumn="hoveredItem.subColumn" />
       </template>
 
       <ChartGrid
@@ -23,6 +23,8 @@
             :grid-height="gridHeight - chartPaddingBottom"
             :records="column.records"
             :value="column.sumValue"
+            @mouseenter="handleMouseEnter($event, column)"
+            @mouseleave="handleMouseLeave"
           />
         </div>
       </ChartGrid>
@@ -32,7 +34,8 @@
 
 <script>
 import ChartGrid from '@/components/Chart/ChartGrid';
-import ChartTooltip from '@/components/Chart/ChartTooltip';
+import ChartTooltip from '@/components/Chart/ChartTooltip/ChartTooltip';
+import ChartTooltipContent from '@/components/Chart/ChartTooltip/ChartTooltipContent';
 import ChartColumn from '@/components/Chart/ChartContent/ChartColumn';
 
 export default {
@@ -41,6 +44,7 @@ export default {
   components: {
     ChartColumn,
     ChartTooltip,
+    ChartTooltipContent,
     ChartGrid,
   },
 
@@ -74,6 +78,7 @@ export default {
   data() {
     return {
       hoveredItem: null,
+      tooltipPosition: null,
     };
   },
 
@@ -88,6 +93,17 @@ export default {
       return {
         height: `${this.gridHeight}px`,
       };
+    },
+  },
+
+  methods: {
+    handleMouseEnter({ position, subColumn }, column) {
+      this.hoveredItem = { subColumn, column };
+      this.tooltipPosition = position;
+    },
+    handleMouseLeave() {
+      this.hoveredItem = null;
+      this.tooltipPosition = null;
     },
   },
 };
