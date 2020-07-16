@@ -14,7 +14,7 @@
       />
     </div>
 
-    <ChartLegend :height="legendHeight" />
+    <ChartLegend :height="legendHeight" :columns="finalColumns" />
   </div>
 </template>
 

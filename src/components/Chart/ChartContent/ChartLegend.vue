@@ -1,6 +1,13 @@
 <template>
   <div class="chart-legend" :style="styles">
-    ChartLegend
+    <div
+      v-for="column in columns"
+      :key="column.name"
+      class="chart-legend__item"
+      :style="getColumnStyles(column)"
+    >
+      {{ capitalize(column.name) }}
+    </div>
   </div>
 </template>
 
@@ -13,6 +20,10 @@ export default {
       type: Number,
       required: true,
     },
+    columns: {
+      type: Array,
+      required: true,
+    },
   },
 
   computed: {
@@ -22,11 +33,31 @@ export default {
       };
     },
   },
+
+  methods: {
+    getColumnStyles(column) {
+      return {
+        left: `${column.left}px`,
+        width: `${column.width}px`,
+      };
+    },
+
+    capitalize(str) {
+      if (typeof str !== 'string') return '';
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    },
+  },
 };
 </script>
 
 <style lang="scss">
 .chart-legend {
+  position: relative;
   background-color: yellow;
+
+  &__item {
+    position: absolute;
+    text-align: center;
+  }
 }
 </style>

@@ -27,6 +27,7 @@ export default {
 html,
 body {
   margin: 0;
+  font-family: 'Titillium Web', sans-serif;
 }
 
 * {
