@@ -83,6 +83,7 @@ export default {
   methods: {
     async initialize() {
       await this.fetchChart();
+      this.fixMissingColumns();
       this.transformChartData();
       this.calculateChart();
       this.isInitialized = true;
@@ -90,7 +91,8 @@ export default {
     async fetchChart() {
       const response = await fetch('/mock.json');
       this.chartData = await response.json();
-
+    },
+    fixMissingColumns() {
       this.columnNames.map(colName => {
         if (this.chartData[colName] === undefined) {
           this.chartData[colName] = [];

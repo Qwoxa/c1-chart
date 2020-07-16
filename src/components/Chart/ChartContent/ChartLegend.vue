@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { capitalize } from '@/components/Chart/utils';
+import capitalize from 'lodash/capitalize';
 
 export default {
   name: 'ChartLegend',

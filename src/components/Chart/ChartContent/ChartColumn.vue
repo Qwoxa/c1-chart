@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import sortBy from 'lodash/sortBy';
+
 import * as d3 from 'd3-scale';
 
 export default {
@@ -67,6 +69,9 @@ export default {
   },
 
   computed: {
+    sortedRecords() {
+      return sortBy(this.records, 'value');
+    },
     classes() {
       const cl = 'chart-column';
 
@@ -107,7 +112,7 @@ export default {
       let accumulator = 0;
       let takenAdditionalSpace = 0;
 
-      this.subColumns = this.records.map(record => {
+      this.subColumns = this.sortedRecords.map(record => {
         const calculatedHeight = yScale(record.value);
 
         const height = Math.max(this.minSubcolumnHeight, calculatedHeight);
@@ -127,7 +132,6 @@ export default {
       });
 
       if (takenAdditionalSpace !== 0) {
-        console.log(takenAdditionalSpace);
         this.evenlyDistributeAdditionalSpace(takenAdditionalSpace);
       }
     },

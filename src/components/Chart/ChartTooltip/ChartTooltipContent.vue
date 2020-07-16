@@ -2,11 +2,7 @@
   <div class="chart-tooltip-content">
     <h3 class="chart-tooltip-content__title">{{ capitalize(column.name) }}</h3>
     <div class="chart-tooltip-content__records">
-      <div
-        v-for="record in column.records"
-        :key="record.name"
-        :class="getRecordItemClasses(record)"
-      >
+      <div v-for="record in sortedRecords" :key="record.name" :class="getRecordItemClasses(record)">
         <div class="chart-tooltip-content__record-name">
           {{ record.name }}
         </div>
@@ -18,7 +14,9 @@
 </template>
 
 <script>
-import { capitalize, divideNumberWithComa } from '@/components/Chart/utils';
+import { divideNumberWithComa } from '@/components/Chart/utils';
+import sortBy from 'lodash/sortBy';
+import capitalize from 'lodash/capitalize';
 
 export default {
   name: 'ChartTooltipContent',
@@ -48,6 +46,12 @@ export default {
         [cl]: true,
         [`${cl}--active`]: record.name === this.subColumn.name,
       };
+    },
+  },
+
+  computed: {
+    sortedRecords() {
+      return sortBy(this.column.records, 'value');
     },
   },
 };
@@ -106,7 +110,7 @@ $padding: 20px;
     width: 0;
     height: 0;
     border-left: 5px solid transparent;
-    border-right: 5 px solid transparent;
+    border-right: 5px solid transparent;
     border-top: 5px solid #313844;
     position: absolute;
     bottom: -5px;
