@@ -1,13 +1,12 @@
 <template>
   <div
-    ref="parent"
-    class="chart-tooltip"
+    class="tooltip-container"
     @mousemove="handleMouseMoveChart"
     @mouseenter="handleMouseEnterBar"
     @mouseleave="handleMouseLeaveBar"
   >
     <Transition name="fade-opacity">
-      <div v-show="isTooltipVisible" ref="tooltip" class="chart-tooltip-content-wr">
+      <div v-show="isTooltipVisible" ref="tooltip" class="tooltip-container__content">
         <slot name="tooltip-content" />
       </div>
     </Transition>
@@ -17,7 +16,7 @@
 
 <script>
 export default {
-  name: 'ChartTooltip',
+  name: 'TooltipContainer',
 
   props: {
     position: {
@@ -46,21 +45,23 @@ export default {
         return;
       }
 
-      const { top, left } = this.position;
-
       const tooltip = this.$refs.tooltip;
-      const rect = tooltip.getBoundingClientRect();
-      const tooltipWidth = rect.right - rect.left;
-      const tootlipHeihgt = rect.top - rect.bottom;
+      const { right, left, top, bottom } = tooltip.getBoundingClientRect();
+      const tooltipWidth = right - left;
+      const tootlipHeihgt = top - bottom;
 
-      tooltip.style.top = `${top + tootlipHeihgt - 7}px`;
-      tooltip.style.left = `${left - tooltipWidth / 2}px`;
+      const { top: columnTop, left: columnLeft } = this.position;
+      const arrowHeight = 5;
+      const paddingDistance = 2;
+
+      tooltip.style.top = `${columnTop + tootlipHeihgt - arrowHeight - paddingDistance}px`;
+      tooltip.style.left = `${columnLeft - tooltipWidth / 2}px`;
     },
   },
 };
 </script>
 <style lang="scss">
-.chart-tooltip {
+.tooltip-container {
   position: relative;
 
   .fade-opacity-enter-active,
@@ -68,11 +69,11 @@ export default {
     transition: opacity 0.15s;
   }
 
-  &-content-wr {
+  &__content {
     position: absolute;
     display: block;
     pointer-events: none;
-    z-index: 5;
+    z-index: 1;
   }
 }
 </style>

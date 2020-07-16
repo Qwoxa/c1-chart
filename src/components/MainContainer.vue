@@ -15,8 +15,9 @@ export default {
   max-width: 1040px;
   padding: 0 20px;
   margin: 0 auto;
-
-  // temp
-  padding-top: 100px;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
 }
 </style>

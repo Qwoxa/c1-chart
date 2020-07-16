@@ -1,9 +1,9 @@
 <template>
-  <div class="chart-grid">
-    <svg class="chart-grid__grid-wr" :width="width" :height="height">
+  <div class="grid">
+    <svg class="grid__lines-wr" :width="width" :height="height">
       <line
         v-for="line in lines"
-        class="chart-grid__line"
+        class="grid__line"
         :key="toStringLine(line)"
         :x1="line.x1"
         :x2="line.x2"
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'ChartGrid',
+  name: 'Grid',
 
   props: {
     height: {
@@ -68,16 +68,14 @@ export default {
         this.lines.push({ x1: currentWidth, x2: currentWidth, y1: 0, y2: this.height });
         currentWidth += this.step;
       }
-
-      console.log(this.lines);
     },
   },
 };
 </script>
 
 <style lang="scss">
-.chart-grid {
-  &__grid-wr {
+.grid {
+  &__lines-wr {
     position: absolute;
   }
 
