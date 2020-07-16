@@ -15,5 +15,8 @@ export default {
   max-width: 1040px;
   padding: 0 20px;
   margin: 0 auto;
+
+  // temp
+  padding-top: 5px;
 }
 </style>

@@ -9,6 +9,8 @@
         :left="column.left"
         :height="column.height"
         :grid-height="gridHeight"
+        :records="column.records"
+        :value="column.sumValue"
       />
     </div>
 
@@ -60,13 +62,15 @@ export default {
       }
 
       return this.chartData.columns.map(column => {
-        const { name } = column;
+        const { name, records, sumValue } = column;
 
         return {
           name,
           left: this.xScale(name),
           width: this.columnWidth,
-          height: this.yScale(column.sumValue),
+          height: this.yScale(sumValue),
+          records,
+          sumValue,
         };
       });
     },
