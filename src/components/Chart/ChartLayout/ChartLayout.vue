@@ -11,9 +11,9 @@
       <Grid
         :height="gridHeight"
         :width="gridWidth"
-        :start-point-height="0.45"
-        :start-point-width="0.45"
-        :step="18.4"
+        :start-point-height="0.37"
+        :start-point-width="0.25"
+        :step="23"
       >
         <div class="chart-layout__body" :style="chartBodyStyles">
           <ChartLayoutColumn
