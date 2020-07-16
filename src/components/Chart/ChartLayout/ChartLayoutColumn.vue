@@ -2,13 +2,13 @@
   <div :class="classes" :style="styles">
     <div
       v-for="subColumn in subColumns"
-      class="chart-column__sub-column-wr"
+      class="chart-layout-column__sub-column-wr"
       :key="subColumn.name"
       :style="getSubColumnStyles(subColumn)"
       @mouseenter="handleMouseEnter(subColumn)"
       @mouseleave="handleMouseLeave"
     >
-      <div class="chart-column__sub-column" />
+      <div class="chart-layout-column__sub-column" />
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@ import sortBy from 'lodash/sortBy';
 import * as d3 from 'd3-scale';
 
 export default {
-  name: 'ChartColumn',
+  name: 'ChartLayoutColumn',
 
   props: {
     records: {
@@ -73,7 +73,7 @@ export default {
       return sortBy(this.records, 'value');
     },
     classes() {
-      const cl = 'chart-column';
+      const cl = 'chart-layout-column';
 
       return {
         [cl]: true,
@@ -167,7 +167,7 @@ export default {
 </script>
 
 <style lang="scss">
-.chart-column {
+.chart-layout-column {
   position: absolute;
   border-radius: 2px;
 

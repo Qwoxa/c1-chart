@@ -1,6 +1,6 @@
 <template>
   <div class="chart">
-    <ChartContent
+    <ChartLayout
       v-if="isInitialized"
       :chartHeight="chartHeight"
       :chartWidth="chartWidth"
@@ -16,16 +16,16 @@
 </template>
 
 <script>
-import ChartContent from '@/components/Chart/ChartContent/ChartContent';
+import ChartLayout from '@/components/Chart/ChartLayout/ChartLayout';
 import ChartDescription from '@/components/Chart/ChartDescription';
-import ChartLegend from '@/components/Chart/ChartContent/ChartLegend';
+import ChartLegend from '@/components/Chart/ChartLegend';
 import * as d3 from 'd3-scale';
 
 export default {
   name: 'Chart',
 
   components: {
-    ChartContent,
+    ChartLayout,
     ChartDescription,
     ChartLegend,
   },

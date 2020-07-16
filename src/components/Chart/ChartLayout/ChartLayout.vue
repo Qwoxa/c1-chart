@@ -1,5 +1,5 @@
 <template>
-  <div class="chart-content" :style="styles">
+  <div class="chart-layout" :style="styles">
     <TooltipContainer :position="tooltipPosition">
       <template v-if="hoveredItem" #tooltip-content>
         <TooltipContent :column="hoveredItem.column" :subColumn="hoveredItem.subColumn" />
@@ -12,8 +12,8 @@
         :start-point-width="0.45"
         :step="18.4"
       >
-        <div class="chart-content__body" :style="chartBodyStyles">
-          <ChartColumn
+        <div class="chart-layout__body" :style="chartBodyStyles">
+          <ChartLayoutColumn
             v-for="(column, idx) in columns"
             :key="column.name"
             :column-index="idx + 1"
@@ -36,13 +36,13 @@
 import Grid from '@/components/Base/Grid';
 import TooltipContainer from '@/components/Base/TooltipContainer';
 import TooltipContent from '@/components/Base/TooltipContent';
-import ChartColumn from '@/components/Chart/ChartContent/ChartColumn';
+import ChartLayoutColumn from '@/components/Chart/ChartLayout/ChartLayoutColumn';
 
 export default {
-  name: 'ChartContent',
+  name: 'ChartLayout',
 
   components: {
-    ChartColumn,
+    ChartLayoutColumn,
     TooltipContainer,
     TooltipContent,
     Grid,
@@ -110,7 +110,7 @@ export default {
 </script>
 
 <style lang="scss">
-.chart-content {
+.chart-layout {
   &__body {
     position: relative;
 
