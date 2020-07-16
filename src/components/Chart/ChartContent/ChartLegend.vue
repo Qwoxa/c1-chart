@@ -46,6 +46,7 @@ export default {
     position: absolute;
     text-align: center;
     font-size: 12px;
+    line-height: 1.2;
   }
 }
 </style>

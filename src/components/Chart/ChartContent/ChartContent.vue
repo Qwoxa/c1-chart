@@ -81,8 +81,6 @@ export default {
 
 <style lang="scss">
 .chart-content {
-  // outline: 1px solid black;
-
   &__body {
     position: relative;
 
