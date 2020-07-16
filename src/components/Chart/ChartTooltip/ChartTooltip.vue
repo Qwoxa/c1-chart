@@ -21,7 +21,7 @@ export default {
 
   props: {
     position: {
-      type: Object,
+      validator: value => typeof value === 'object' || value === null,
       required: true,
     },
   },
@@ -29,10 +29,6 @@ export default {
   data() {
     return {
       isTooltipVisible: false,
-      // styles: {
-      //   left: 0,
-      //   top: 0,
-      // },
     };
   },
 
@@ -53,8 +49,12 @@ export default {
       const { top, left } = this.position;
 
       const tooltip = this.$refs.tooltip;
-      tooltip.style.top = `${top}px`;
-      tooltip.style.left = `${left}px`;
+      const rect = tooltip.getBoundingClientRect();
+      const tooltipWidth = rect.right - rect.left;
+      const tootlipHeihgt = rect.top - rect.bottom;
+
+      tooltip.style.top = `${top + tootlipHeihgt - 7}px`;
+      tooltip.style.left = `${left - tooltipWidth / 2}px`;
     },
   },
 };
