@@ -61,31 +61,7 @@ export default {
       .domain([0, this.value])
       .range([0, this.height]);
 
-    let accumulator = 0;
-    let takenAdditionalSpace = 0;
-    this.subColumns = this.records.map(record => {
-      const calculatedHeight = yScale(record.value);
-
-      const height = Math.max(this.minSubcolumnHeight, calculatedHeight);
-      takenAdditionalSpace +=
-        this.minSubcolumnHeight <= calculatedHeight
-          ? 0
-          : this.minSubcolumnHeight - calculatedHeight;
-
-      const offsetBottom = accumulator;
-      accumulator += height;
-
-      return {
-        ...record,
-        height,
-        offsetBottom,
-      };
-    });
-
-    if (takenAdditionalSpace !== 0) {
-      console.log(takenAdditionalSpace);
-      this.evenlyDistributeAdditionalSpace(takenAdditionalSpace);
-    }
+    this.calculateYScaleForRecords(yScale);
   },
 
   computed: {
@@ -112,6 +88,34 @@ export default {
       return {
         height: `${subColumn.height}px`,
       };
+    },
+    calculateYScaleForRecords(yScale) {
+      let accumulator = 0;
+      let takenAdditionalSpace = 0;
+
+      this.subColumns = this.records.map(record => {
+        const calculatedHeight = yScale(record.value);
+
+        const height = Math.max(this.minSubcolumnHeight, calculatedHeight);
+        takenAdditionalSpace +=
+          this.minSubcolumnHeight <= calculatedHeight
+            ? 0
+            : this.minSubcolumnHeight - calculatedHeight;
+
+        const offsetBottom = accumulator;
+        accumulator += height;
+
+        return {
+          ...record,
+          height,
+          offsetBottom,
+        };
+      });
+
+      if (takenAdditionalSpace !== 0) {
+        console.log(takenAdditionalSpace);
+        this.evenlyDistributeAdditionalSpace(takenAdditionalSpace);
+      }
     },
     evenlyDistributeAdditionalSpace(additionalSpace) {
       let isDistributed = false;
