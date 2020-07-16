@@ -1,18 +1,26 @@
 <template>
   <div v-if="isInitialized" class="chart-content" :style="styles">
-    <div class="chart-content__body" :style="chartBodyStyles">
-      <ChartColumn
-        v-for="(column, idx) in finalColumns"
-        :key="column.name"
-        :column-index="idx + 1"
-        :width="column.width"
-        :left="column.left"
-        :height="column.height"
-        :grid-height="gridHeight"
-        :records="column.records"
-        :value="column.sumValue"
-      />
-    </div>
+    <ChartGrid
+      :height="gridHeight"
+      :width="gridWidth"
+      :start-point-height="0.45"
+      :start-point-width="0.45"
+      :step="18.4"
+    >
+      <div class="chart-content__body" :style="chartBodyStyles">
+        <ChartColumn
+          v-for="(column, idx) in finalColumns"
+          :key="column.name"
+          :column-index="idx + 1"
+          :width="column.width"
+          :left="column.left"
+          :height="column.height"
+          :grid-height="gridHeight"
+          :records="column.records"
+          :value="column.sumValue"
+        />
+      </div>
+    </ChartGrid>
 
     <ChartLegend :height="legendHeight" :columns="finalColumns" />
   </div>
@@ -21,6 +29,7 @@
 <script>
 import * as d3 from 'd3-scale';
 
+import ChartGrid from '@/components/Chart/ChartGrid';
 import ChartColumn from '@/components/Chart/ChartContent/ChartColumn';
 import ChartLegend from '@/components/Chart/ChartContent/ChartLegend';
 
@@ -30,6 +39,7 @@ export default {
   components: {
     ChartColumn,
     ChartLegend,
+    ChartGrid,
   },
 
   data() {
@@ -128,7 +138,7 @@ export default {
       this.yScale = d3
         .scaleLinear()
         .domain(yDomain)
-        .range([0, this.gridHeight - 5]);
+        .range([0, this.gridHeight - 8]);
     },
     getYDomain() {
       const sumValues = this.chartData.columns.map(c => c.sumValue);
@@ -140,7 +150,7 @@ export default {
 
 <style lang="scss">
 .chart-content {
-  outline: 1px solid black;
+  // outline: 1px solid black;
 
   &__body {
     position: relative;

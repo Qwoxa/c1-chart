@@ -53,7 +53,6 @@ export default {
 <style lang="scss">
 .chart-legend {
   position: relative;
-  background-color: yellow;
 
   &__item {
     position: absolute;
