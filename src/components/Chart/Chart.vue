@@ -110,8 +110,6 @@ export default {
         const sumValue = records.reduce((acc, r) => acc + r.value, 0);
         return { name, records, sumValue };
       });
-
-      console.log(this.chartData);
     },
     calculateChart() {
       this.xScale = d3
@@ -122,7 +120,6 @@ export default {
         .round(true);
 
       const yDomain = this.getYDomain();
-      // todo hardcode
       this.yScale = d3
         .scaleLinear()
         .domain(yDomain)
