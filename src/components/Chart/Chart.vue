@@ -46,9 +46,9 @@ export default {
       chartWidth: 334,
       gridHeight: 440,
       gridWidth: 334,
-      chartPaddingTop: 9.5,
-      chartPaddingBottom: 9.5,
-      gridCellSize: 21,
+      chartPaddingTop: 12.5,
+      chartPaddingBottom: 12.5,
+      gridCellSize: 23,
       subcolumnVerticalDistance: 3,
       subcolumnMinHeight: 4,
     };
