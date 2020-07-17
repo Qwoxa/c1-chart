@@ -1,12 +1,9 @@
 <template>
   <div class="chart-layout-tooltip-content">
-    <h3 class="chart-layout-tooltip-content__title">{{ capitalize(column.name) }}</h3>
+    <h3 class="chart-layout-tooltip-content__heading">{{ capitalize(heading) }}</h3>
+
     <div class="chart-layout-tooltip-content__records">
-      <div
-        v-for="record in column.records"
-        :key="record.name"
-        :class="getRecordItemClasses(record)"
-      >
+      <div v-for="record in records" :key="record.name" :class="getRecordItemClasses(record)">
         <div class="chart-layout-tooltip-content__record-name">
           {{ record.name }}
         </div>
@@ -27,12 +24,12 @@ export default {
   name: 'ChartLayoutTooltipContent',
 
   props: {
-    column: {
-      type: Object,
+    heading: {
+      type: String,
       required: true,
     },
-    subColumn: {
-      type: Object,
+    records: {
+      type: Array,
       required: true,
     },
   },
@@ -49,7 +46,7 @@ export default {
 
       return {
         [cl]: true,
-        [`${cl}--active`]: record.name === this.subColumn.name,
+        [`${cl}--active`]: record.isActive,
       };
     },
   },
@@ -68,7 +65,7 @@ $padding: 20px;
   color: #fff;
   width: 250px;
 
-  &__title {
+  &__heading {
     margin: 0 0 8px 0;
     padding: $padding $padding 0 $padding;
   }

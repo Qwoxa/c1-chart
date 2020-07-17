@@ -3,8 +3,8 @@
     <TooltipContainer :position="tooltipPosition">
       <template v-if="hoveredItem" #tooltip-content>
         <ChartLayoutTooltipContent
-          :column="hoveredItem.column"
-          :subColumn="hoveredItem.subColumn"
+          :records="hoveredItem.records"
+          :heading="hoveredItem.columnName"
         />
       </template>
 
@@ -13,7 +13,7 @@
           <ChartLayoutColumn
             v-for="(column, idx) in columns"
             :key="column.name"
-            :column-index="idx + 1"
+            :column-index="idx"
             :width="column.width"
             :left="column.left"
             :height="column.height"
@@ -95,8 +95,10 @@ export default {
   },
 
   methods: {
-    handleMouseEnter({ position, subColumn }, column) {
-      this.hoveredItem = { subColumn, column };
+    handleMouseEnter({ position, activeSubcolumnName }, column) {
+      const records = column.records.map(r => ({ ...r, isActive: r.name === activeSubcolumnName }));
+
+      this.hoveredItem = { records, columnName: column.name };
       this.tooltipPosition = position;
     },
     handleMouseLeave() {

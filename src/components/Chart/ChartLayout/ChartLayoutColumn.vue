@@ -77,7 +77,7 @@ export default {
 
       return {
         [cl]: true,
-        [`${cl}--column-${this.columnIndex}`]: true,
+        [`${cl}--column-${this.columnIndex + 1}`]: true,
       };
     },
     styles() {
@@ -96,7 +96,7 @@ export default {
       const left = this.left + this.width / 2;
       const position = { top, left };
 
-      const params = { position, subColumn };
+      const params = { position, activeSubcolumnName: subColumn.name };
 
       this.$emit('mouseenter', params);
     },
