@@ -49,24 +49,44 @@ export default {
   },
 
   created() {
-    this.initializeGrid();
+    this.initializeHorizonalLines();
+    this.initializeVerticalLines();
   },
 
   methods: {
     toStringLine(line) {
       return `${line.x1}-${line.x2}-${line.y1}-${line.y2}`;
     },
-    initializeGrid() {
-      let currentHeight = this.step * this.startPointHeight;
-      while (currentHeight <= this.height) {
-        this.lines.push({ x1: 0, x2: this.width, y1: currentHeight, y2: currentHeight });
-        currentHeight += this.step;
-      }
+    initializeHorizonalLines() {
+      let dividedCell = this.width % this.step;
+      if (dividedCell === 0) dividedCell = this.step;
 
-      let currentWidth = this.step * this.startPointWidth;
-      while (currentWidth <= this.width) {
-        this.lines.push({ x1: currentWidth, x2: currentWidth, y1: 0, y2: this.height });
+      const offset = dividedCell / 2;
+      let currentWidth = offset;
+      while (currentWidth <= this.width - offset) {
+        this.lines.push({
+          x1: currentWidth,
+          x2: currentWidth,
+          y1: 0,
+          y2: this.height,
+        });
         currentWidth += this.step;
+      }
+    },
+    initializeVerticalLines() {
+      let dividedCell = this.height % this.step;
+      if (dividedCell === 0) dividedCell = this.step;
+
+      const offset = dividedCell / 2;
+      let currentHeight = offset;
+      while (currentHeight <= this.height - offset) {
+        this.lines.push({
+          x1: 0,
+          x2: this.width,
+          y1: currentHeight,
+          y2: currentHeight,
+        });
+        currentHeight += this.step;
       }
     },
   },

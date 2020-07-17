@@ -13,7 +13,7 @@
         :width="gridWidth"
         :start-point-height="0.37"
         :start-point-width="0.25"
-        :step="23"
+        :step="21"
       >
         <div class="chart-layout__body" :style="chartBodyStyles">
           <ChartLayoutColumn
@@ -122,7 +122,7 @@ export default {
       display: block;
       width: 100%;
       position: absolute;
-      bottom: 8px;
+      bottom: 10px;
       border-bottom: 1px dashed #737c8c;
     }
   }
