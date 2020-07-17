@@ -69,8 +69,7 @@ export default {
       let dividedCell = this.height % this.step;
       if (dividedCell === 0) dividedCell = this.step;
 
-      const offset = Math.ceil(dividedCell / 2); // + 0.5;
-      console.log(dividedCell / 2);
+      const offset = Math.ceil(dividedCell / 2);
       let currentHeight = offset;
       while (currentHeight <= this.height - offset) {
         this.lines.push({
