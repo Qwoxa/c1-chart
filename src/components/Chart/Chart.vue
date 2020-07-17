@@ -2,11 +2,12 @@
   <div class="chart" :style="chartStyles">
     <ChartLayout
       v-if="isInitialized"
-      :chartHeight="chartHeight"
-      :chartWidth="chartWidth"
-      :gridHeight="gridHeight"
-      :gridWidth="gridWidth"
-      :chartPaddingBottom="chartPaddingBottom"
+      :chart-height="chartHeight"
+      :chart-width="chartWidth"
+      :grid-height="gridHeight"
+      :grid-width="gridWidth"
+      :chart-padding-bottom="chartPaddingBottom"
+      :grid-cell-size="gridCellSize"
       :columns="finalColumns"
     />
     <ChartLegend class="chart__legend" :columns="finalColumns" />
@@ -46,6 +47,7 @@ export default {
       gridWidth: 334,
       chartPaddingTop: 9.5,
       chartPaddingBottom: 9.5,
+      gridCellSize: 21,
     };
   },
 

@@ -8,7 +8,7 @@
         />
       </template>
 
-      <Grid :height="gridHeight" :width="gridWidth" :step="21">
+      <Grid :height="gridHeight" :width="gridWidth" :step="gridCellSize">
         <div class="chart-layout__body" :style="chartBodyStyles">
           <ChartLayoutColumn
             v-for="(column, idx) in columns"
@@ -60,6 +60,10 @@ export default {
       required: true,
     },
     chartPaddingBottom: {
+      type: Number,
+      required: true,
+    },
+    gridCellSize: {
       type: Number,
       required: true,
     },
