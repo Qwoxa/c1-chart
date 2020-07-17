@@ -20,6 +20,8 @@
             :grid-height="gridHeight - chartPaddingBottom"
             :records="column.records"
             :value="column.sumValue"
+            :vertical-distance="subcolumnVerticalDistance"
+            :min-height="subcolumnMinHeight"
             @mouseenter="handleMouseEnter($event, column)"
             @mouseleave="handleMouseLeave"
           />
@@ -64,6 +66,14 @@ export default {
       required: true,
     },
     gridCellSize: {
+      type: Number,
+      required: true,
+    },
+    subcolumnVerticalDistance: {
+      type: Number,
+      required: true,
+    },
+    subcolumnMinHeight: {
       type: Number,
       required: true,
     },

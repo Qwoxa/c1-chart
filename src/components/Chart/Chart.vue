@@ -8,6 +8,8 @@
       :grid-width="gridWidth"
       :chart-padding-bottom="chartPaddingBottom"
       :grid-cell-size="gridCellSize"
+      :subcolumn-vertical-distance="subcolumnVerticalDistance"
+      :subcolumn-min-height="subcolumnMinHeight"
       :columns="finalColumns"
     />
     <ChartLegend class="chart__legend" :columns="finalColumns" />
@@ -48,6 +50,8 @@ export default {
       chartPaddingTop: 9.5,
       chartPaddingBottom: 9.5,
       gridCellSize: 21,
+      subcolumnVerticalDistance: 3,
+      subcolumnMinHeight: 4,
     };
   },
 
@@ -64,13 +68,14 @@ export default {
 
       return this.chartData.columns.map((column, idx) => {
         const { name, records, sumValue } = column;
+        const minHeight = records.length * 4 + records.length * 3;
 
         return {
           name,
           legendName: this.legendNames[name],
           left: this.xScale(idx),
           width: this.columnWidth,
-          height: this.yScale(sumValue),
+          height: Math.max(this.yScale(sumValue), minHeight),
           records,
           sumValue,
         };

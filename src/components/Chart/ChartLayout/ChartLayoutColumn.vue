@@ -50,12 +50,19 @@ export default {
       type: Number,
       required: true,
     },
+    verticalDistance: {
+      type: Number,
+      required: true,
+    },
+    minHeight: {
+      type: Number,
+      required: true,
+    },
   },
 
   data() {
     return {
       subColumns: null,
-      minSubcolumnHeight: 7,
     };
   },
 
@@ -69,6 +76,9 @@ export default {
   },
 
   computed: {
+    minSubcolumnHeight() {
+      return this.verticalDistance + this.minHeight;
+    },
     sortedRecords() {
       return sortBy(this.records, 'value');
     },
