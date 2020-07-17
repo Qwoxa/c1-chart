@@ -52,6 +52,7 @@ export default {
     initializeHorizonalLines() {
       let dividedCell = this.width % this.step;
       if (dividedCell === 0) dividedCell = this.step;
+      else if (dividedCell < this.step * 0.4) dividedCell += this.step;
 
       const offset = dividedCell / 2;
       let currentWidth = offset;
@@ -68,6 +69,7 @@ export default {
     initializeVerticalLines() {
       let dividedCell = this.height % this.step;
       if (dividedCell === 0) dividedCell = this.step;
+      else if (dividedCell < this.step * 0.4) dividedCell += this.step;
 
       const offset = Math.ceil(dividedCell / 2);
       let currentHeight = offset;
