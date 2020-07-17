@@ -3,6 +3,7 @@
     <div
       v-for="column in columns"
       :key="column.legendName"
+      :title="column.legendName"
       class="chart-legend__item"
       :style="getColumnStyles(column)"
     >
@@ -48,6 +49,9 @@ export default {
     font-size: 10px;
     font-weight: 600;
     color: #737c8c;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 </style>
