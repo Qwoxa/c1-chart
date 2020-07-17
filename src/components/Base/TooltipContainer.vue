@@ -28,6 +28,7 @@ export default {
   data() {
     return {
       isTooltipVisible: false,
+      paddingDistance: 2,
     };
   },
 
@@ -51,11 +52,13 @@ export default {
       const tootlipHeihgt = top - bottom;
 
       const { top: columnTop, left: columnLeft } = this.position;
-      const arrowHeight = 5;
-      const paddingDistance = 2;
 
-      tooltip.style.top = `${columnTop + tootlipHeihgt - arrowHeight - paddingDistance}px`;
-      tooltip.style.left = `${columnLeft - tooltipWidth / 2}px`;
+      const arrowHeight = 5;
+      const topOffset = tootlipHeihgt - arrowHeight - this.paddingDistance;
+      tooltip.style.top = `${columnTop + topOffset}px`;
+
+      const leftOffset = tooltipWidth / 2;
+      tooltip.style.left = `${columnLeft - leftOffset}px`;
     },
   },
 };
