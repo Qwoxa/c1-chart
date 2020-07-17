@@ -8,13 +8,7 @@
         />
       </template>
 
-      <Grid
-        :height="gridHeight"
-        :width="gridWidth"
-        :start-point-height="0.37"
-        :start-point-width="0.25"
-        :step="21"
-      >
+      <Grid :height="gridHeight" :width="gridWidth" :step="21">
         <div class="chart-layout__body" :style="chartBodyStyles">
           <ChartLayoutColumn
             v-for="(column, idx) in columns"
@@ -122,7 +116,7 @@ export default {
       display: block;
       width: 100%;
       position: absolute;
-      bottom: 10px;
+      bottom: 9.5px;
       border-bottom: 1px dashed #737c8c;
     }
   }

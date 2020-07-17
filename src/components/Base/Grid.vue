@@ -28,14 +28,6 @@ export default {
       type: Number,
       required: true,
     },
-    startPointHeight: {
-      type: Number,
-      default: 0,
-    },
-    startPointWidth: {
-      type: Number,
-      default: 0,
-    },
     step: {
       type: Number,
       required: true,
@@ -77,7 +69,8 @@ export default {
       let dividedCell = this.height % this.step;
       if (dividedCell === 0) dividedCell = this.step;
 
-      const offset = dividedCell / 2;
+      const offset = Math.ceil(dividedCell / 2); // + 0.5;
+      console.log(dividedCell / 2);
       let currentHeight = offset;
       while (currentHeight <= this.height - offset) {
         this.lines.push({

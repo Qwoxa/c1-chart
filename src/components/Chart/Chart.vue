@@ -48,8 +48,8 @@ export default {
       chartWidth: 334,
       gridHeight: 440,
       gridWidth: 334,
-      chartPaddingTop: 10,
-      chartPaddingBottom: 10,
+      chartPaddingTop: 9.5,
+      chartPaddingBottom: 9.5,
     };
   },
 
