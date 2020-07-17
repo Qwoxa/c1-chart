@@ -24,6 +24,7 @@
             @mouseleave="handleMouseLeave"
           />
         </div>
+        <div class="chart-layout__zero-line" :style="zeroLineStyles" />
       </Grid>
     </TooltipContainer>
   </div>
@@ -91,6 +92,11 @@ export default {
         height: `${this.gridHeight}px`,
       };
     },
+    zeroLineStyles() {
+      return {
+        bottom: `${this.chartPaddingBottom}px`,
+      };
+    },
   },
 
   methods: {
@@ -108,17 +114,10 @@ export default {
 
 <style lang="scss">
 .chart-layout {
-  &__body {
-    position: relative;
-
-    &:after {
-      content: '';
-      display: block;
-      width: 100%;
-      position: absolute;
-      bottom: 9.5px;
-      border-bottom: 1px dashed #737c8c;
-    }
+  &__zero-line {
+    width: 100%;
+    position: absolute;
+    border-bottom: 1px dashed #737c8c;
   }
 }
 </style>
