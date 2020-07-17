@@ -42,6 +42,7 @@ export default {
   position: relative;
 
   &__item {
+    line-height: 1;
     position: absolute;
     text-align: center;
     font-size: 10px;

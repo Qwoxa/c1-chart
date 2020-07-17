@@ -1,5 +1,5 @@
 <template>
-  <div class="chart">
+  <div class="chart" :style="chartStyles">
     <ChartLayout
       v-if="isInitialized"
       :chartHeight="chartHeight"
@@ -9,7 +9,7 @@
       :chartPaddingBottom="chartPaddingBottom"
       :columns="finalColumns"
     />
-    <ChartLegend :columns="finalColumns" />
+    <ChartLegend class="chart__legend" :columns="finalColumns" />
   </div>
 </template>
 
@@ -50,6 +50,11 @@ export default {
   },
 
   computed: {
+    chartStyles() {
+      return {
+        height: `${this.chartHeight}px`,
+      };
+    },
     finalColumns() {
       if (!this.isInitialized) {
         return [];
@@ -131,5 +136,8 @@ export default {
 
 <style lang="scss">
 .chart {
+  &__legend {
+    margin-top: 10px;
+  }
 }
 </style>

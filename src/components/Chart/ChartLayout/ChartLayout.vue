@@ -47,10 +47,6 @@ export default {
   },
 
   props: {
-    chartHeight: {
-      type: Number,
-      required: true,
-    },
     chartWidth: {
       type: Number,
       required: true,
@@ -84,7 +80,6 @@ export default {
     styles() {
       return {
         width: `${this.chartWidth}px`,
-        height: `${this.chartHeight}px`,
       };
     },
     chartBodyStyles() {
