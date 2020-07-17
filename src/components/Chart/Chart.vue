@@ -1,7 +1,6 @@
 <template>
-  <div class="chart" :style="chartStyles">
+  <div v-if="isInitialized" class="chart" :style="chartStyles">
     <ChartLayout
-      v-if="isInitialized"
       :chart-height="chartHeight"
       :chart-width="chartWidth"
       :grid-height="gridHeight"
