@@ -1,10 +1,9 @@
 <template>
   <div :class="classes" :style="styles">
     <div
-      v-for="subColumn in subColumns"
-      class="chart-layout-column__sub-column-wr"
+      v-for="(subColumn, idx) in subColumns"
       :key="subColumn.name"
-      :style="getSubColumnStyles(subColumn)"
+      :style="getSubColumnStyles(subColumn, idx)"
       @mouseenter="handleMouseEnter(subColumn)"
       @mouseleave="handleMouseLeave"
     >
@@ -113,9 +112,11 @@ export default {
     handleMouseLeave() {
       this.$emit('mouseleave');
     },
-    getSubColumnStyles(subColumn) {
+    getSubColumnStyles(subColumn, idx) {
+      const isLastSubcolumn = idx === this.subColumns.length - 1;
       return {
         height: `${subColumn.height}px`,
+        ...(!isLastSubcolumn && { paddingBottom: `${this.verticalDistance}px` }),
       };
     },
     calculateYScaleForRecords(yScale) {
@@ -183,10 +184,6 @@ export default {
 
   &__sub-column {
     height: 100%;
-  }
-
-  &__sub-column-wr:not(:last-child) {
-    padding-bottom: 3px;
   }
 
   &--column-1 & {
