@@ -10,14 +10,11 @@
       :columns="finalColumns"
     />
     <ChartLegend :columns="finalColumns" />
-
-    <ChartDescription />
   </div>
 </template>
 
 <script>
 import ChartLayout from '@/components/Chart/ChartLayout/ChartLayout';
-import ChartDescription from '@/components/Chart/ChartDescription';
 import ChartLegend from '@/components/Chart/ChartLegend';
 import * as d3 from 'd3-scale';
 
@@ -26,15 +23,14 @@ export default {
 
   components: {
     ChartLayout,
-    ChartDescription,
     ChartLegend,
   },
 
   data() {
     return {
       isInitialized: false,
-
       chartData: null,
+
       columnNames: ['income', 'expenses'],
       legendNames: {
         income: 'Income/revenue',
