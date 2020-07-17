@@ -41,7 +41,6 @@ export default {
         expenses: 'Expenses',
       },
 
-      xScale: null,
       yScale: null,
 
       columnWidth: 92,
@@ -60,13 +59,13 @@ export default {
         return [];
       }
 
-      return this.chartData.columns.map(column => {
+      return this.chartData.columns.map((column, idx) => {
         const { name, records, sumValue } = column;
 
         return {
           name,
           legendName: this.legendNames[name],
-          left: this.xScale(name),
+          left: this.xScale(idx),
           width: this.columnWidth,
           height: this.yScale(sumValue),
           records,
@@ -112,13 +111,6 @@ export default {
       });
     },
     calculateChart() {
-      this.xScale = d3
-        .scaleBand()
-        .padding(0.35)
-        .domain(this.columnNames)
-        .range([0, this.chartWidth])
-        .round(true);
-
       const yDomain = this.getYDomain();
       this.yScale = d3
         .scaleLinear()
@@ -128,6 +120,14 @@ export default {
     getYDomain() {
       const sumValues = this.chartData.columns.map(c => c.sumValue);
       return [0, Math.max(...sumValues)];
+    },
+    xScale(idx) {
+      const colsQty = 2;
+      const paddingsQty = colsQty + 1;
+
+      const freeSpace = this.chartWidth - this.columnWidth * colsQty;
+      const padding = freeSpace / paddingsQty;
+      return padding + idx * padding + idx * this.columnWidth;
     },
   },
 };
